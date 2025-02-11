@@ -78,48 +78,49 @@ struct ContentView: View {
     }
     
     func startTimer() {
-        timer?.invalidate()
+        timer?.invalidate() // invalidates the timer
+        // starts timer - 5 seconds
         timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
-            numOfWrongAnswers += 1
-            numOfAttempts += 1
-            updateGame()
+            numOfWrongAnswers += 1 // increases count for wrong answer if answer is wrong
+            numOfAttempts += 1 x// increases count for correct answer if answer is wrong
+            updateGame() // moves on to the nect integer
         }
     }
     
     func checkAnswer(isPrimeSelected: Bool) {
-        timer?.invalidate()
+        timer?.invalidate() // stops the timer
         
-        let isPrime = isPrimeNumber(currentNumber)
-        if isPrimeSelected == isPrime {
+        let isPrime = isPrimeNumber(currentNumber) // checks if integer is prime
+        if isPrimeSelected == isPrime { // if prime and user selects prime, increases correct count
             statusIcon = "checkmark"
             numOfCorrectAnswers += 1
         } else {
-            statusIcon = "xmark"
+            statusIcon = "xmark" // else if wrong answer displays xmark and increases wrong count
             numOfWrongAnswers += 1
         }
         
-        numOfAttempts += 1
+        numOfAttempts += 1 // updating number of attempts
         
-        if numOfAttempts % 10 == 0 {
+        if numOfAttempts % 10 == 0 { // showing alert after 10 attempts
             isResultDisplayed = true
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // wait a moment before displaying another number to user
             updateGame()
         }
     }
     
-    func updateGame() {
-        currentNumber = Int.random(in: 1...100)
-        statusIcon = nil
-        startTimer()
+    func updateGame() { // updates the game
+        currentNumber = Int.random(in: 1...100) // creates a new number
+        statusIcon = nil // clears icon
+        startTimer()// timer restarts when new number is displayed
     }
     
-    func isPrimeNumber(_ num: Int) -> Bool {
-        if num < 2 { return false }
-        for i in 2..<num {
-            if num % i == 0 { return false }
+    func isPrimeNumber(_ num: Int) -> Bool { // mathmatical functionality - logic
+        if num < 2 { return false } // if integer is less than 2 = not prime
+        for i in 2..<num { // looping
+            if num % i == 0 { return false }// if integer is divisable = not prime
         }
-        return true
+        return true // if integer is not divisable by any integer = prime
     }
 }
 #Preview {
