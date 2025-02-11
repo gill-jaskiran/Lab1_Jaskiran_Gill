@@ -60,6 +60,7 @@ struct ContentView: View {
                     .frame(width: 80, height: 80)
                     .padding(.top, 10)
             }
+            Spacer()
         }
         .onAppear {
             startTimer()
