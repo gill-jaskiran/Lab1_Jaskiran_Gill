@@ -24,7 +24,7 @@ struct ContentView: View {
             Text("Is this a Prime Number?")
                 .font(.title)
                 .padding(.top, 10)
-            Text("\(currentNumber)") //a adding the heading and UI
+            Text("\(currentNumber)") //adding the heading and UI
                 .font(.system(size: 90, weight: .bold))
                 .padding(.bottom, 0)
             
@@ -55,7 +55,14 @@ struct ContentView: View {
         if numOfAttempts % 10 == 0 {
             isResultDisplayed = true
         }
-        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            updateGame()
+        }
+    }
+    
+    func updateGame() {
+        currentNumber = Int.random(in: 1...100)
+        startTimer()
     }
     
     func isPrimeNumber(_ num: Int) -> Bool {
