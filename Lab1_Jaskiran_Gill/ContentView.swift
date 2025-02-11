@@ -2,14 +2,13 @@
 //  ContentView.swift
 //  Lab1_Jaskiran_Gill
 //
-//
-
 import SwiftUI
 
 struct ContentView: View {
     @State private var currentNumber = Int.random(in: 1...100)
     @State private var numOfCorrectAnswers = 0
     @State private var numOfWrongAnswers = 0
+    @State private var statusIcon: String? = nil
     @State private var numOfAttempts = 0
     @State private var isResultDisplayed = false
     @State private var timer: Timer?
@@ -27,7 +26,6 @@ struct ContentView: View {
             Text("\(currentNumber)") //adding the heading and UI
                 .font(.system(size: 90, weight: .bold))
                 .padding(.bottom, 0)
-            
             VStack {
                 Button(action: {
                     checkAnswer(isPrimeSelected: true)
@@ -54,25 +52,44 @@ struct ContentView: View {
                 }
             }
             
-            }
-            
-        }
-        
-        func startTimer() {
-            timer?.invalidate()
-            timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
-                numOfWrongAnswers += 1
-                numOfAttempts += 1
+            if let imageName = statusIcon {
+                Image(systemName: imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 80, height: 80)
+                    .padding(.top, 10)
             }
         }
+        .onAppear {
+            startTimer()
+        }
+        .alert(isPresented: $isResultDisplayed) {
+            Alert(
+                title: Text("Results"),
+                message: Text("Total Correct: \(numOfCorrectAnswers)\nTotal Wrong: \(numOfWrongAnswers)"),
+                dismissButton: .default(Text("OK"))
+            )
+        }
+    }
+    
+    func startTimer() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
+            numOfWrongAnswers += 1
+            numOfAttempts += 1
+            updateGame()
+        }
+    }
     
     func checkAnswer(isPrimeSelected: Bool) {
         timer?.invalidate()
         
         let isPrime = isPrimeNumber(currentNumber)
         if isPrimeSelected == isPrime {
+            statusIcon = "checkmark"
             numOfCorrectAnswers += 1
         } else {
+            statusIcon = "xmark"
             numOfWrongAnswers += 1
         }
         
@@ -88,6 +105,7 @@ struct ContentView: View {
     
     func updateGame() {
         currentNumber = Int.random(in: 1...100)
+        statusIcon = nil
         startTimer()
     }
     
@@ -98,7 +116,7 @@ struct ContentView: View {
         }
         return true
     }
-    }
+}
 #Preview {
     ContentView()
 }
