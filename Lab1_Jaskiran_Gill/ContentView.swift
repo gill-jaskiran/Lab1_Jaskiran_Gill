@@ -23,6 +23,7 @@ struct ContentView: View {
             Text("Is this a Prime Number?")
                 .font(.title)
                 .padding(.top, 10)
+            Spacer()
             Text("\(currentNumber)") //adding the heading and UI
                 .font(.system(size: 90, weight: .bold))
                 .padding(.bottom, 0)
