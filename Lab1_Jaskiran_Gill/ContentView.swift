@@ -72,17 +72,26 @@ struct ContentView: View {
             Alert(
                 title: Text("Results"), // adding UI for the alert
                 message: Text("Total Correct: \(numOfCorrectAnswers)\nTotal Wrong: \(numOfWrongAnswers)"),
-                dismissButton: .default(Text("OK"))
+                dismissButton: .default(Text("OK")){
+                    resetGame() // reseting game after alert
+                }
             )
         }
     }
     
+    func resetGame() {
+        numOfCorrectAnswers = 0
+        numOfWrongAnswers = 0
+        numOfAttempts = 0
+        updateGame()
+    }
+
     func startTimer() {
         timer?.invalidate() // invalidates the timer
         // starts timer - 5 seconds
         timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
             numOfWrongAnswers += 1 // increases count for wrong answer if answer is wrong
-            numOfAttempts += 1 x// increases count for correct answer if answer is wrong
+            numOfAttempts += 1 // increases count for correct answer if answer is wrong
             updateGame() // moves on to the nect integer
         }
     }
