@@ -58,6 +58,7 @@ struct ContentView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 80, height: 80)
+                    .foregroundColor(imageName == "checkmark" ? .green : .red)
                     .padding(.top, 10)
             }
             Spacer()
