@@ -8,7 +8,12 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Prime Game") // Adding Game Title
+        VStack {
+            Text("Prime Game")
+                .font(.largeTitle)
+                .foregroundColor(.pink)
+                .padding(.top, 40)
+        }
     }
 }
 
