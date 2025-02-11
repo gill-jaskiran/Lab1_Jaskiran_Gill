@@ -28,6 +28,20 @@ struct ContentView: View {
                 .font(.system(size: 90, weight: .bold))
                 .padding(.bottom, 0)
             
+            VStack {
+                Button(action: {
+                    checkAnswer(isPrimeSelected: true)
+                }) {
+                    Text("Yes - Prime")
+                }
+                
+                Button(action: {
+                    checkAnswer(isPrimeSelected: false)
+                }) {
+                    Text("No - Not Prime")
+                }
+            }
+            
             }
             
         }
