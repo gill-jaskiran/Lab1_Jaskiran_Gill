@@ -5,13 +5,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var currentNumber = Int.random(in: 1...100)
-    @State private var numOfCorrectAnswers = 0
-    @State private var numOfWrongAnswers = 0
-    @State private var statusIcon: String? = nil
-    @State private var numOfAttempts = 0
-    @State private var isResultDisplayed = false
-    @State private var timer: Timer?
+    // State variables
+    @State private var currentNumber = Int.random(in: 1...100) // Generating random number in range 1-100
+    @State private var numOfCorrectAnswers = 0 // logging correct answer
+    @State private var numOfWrongAnswers = 0 // logging wrong answer
+    @State private var statusIcon: String? = nil // storing icon name for feedback to user
+    @State private var numOfAttempts = 0 // tacking attempts
+    @State private var isResultDisplayed = false // for when alert will be displayed
+    @State private var timer: Timer? // initializing the timer
     
     var body: some View {
         VStack {
