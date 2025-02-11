@@ -15,7 +15,9 @@ struct ContentView: View {
                 .font(.largeTitle) // Added UI
                 .foregroundColor(.pink)
                 .padding(.top, 40)
-            
+            Text("Is this a Prime Number?")
+                            .font(.title)
+                            .padding(.top, 10)
             Text("\(currentNumber)") //a adding the heading and UI
                        .font(.system(size: 90, weight: .bold))
                        .padding(.bottom, 20)
