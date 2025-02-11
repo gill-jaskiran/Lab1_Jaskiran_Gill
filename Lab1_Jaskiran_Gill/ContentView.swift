@@ -33,12 +33,24 @@ struct ContentView: View {
                     checkAnswer(isPrimeSelected: true)
                 }) {
                     Text("Yes - Prime")
+                        .font(.title)
+                        .padding()
+                        .frame(width: 340, height: 50)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(15)
                 }
                 
                 Button(action: {
                     checkAnswer(isPrimeSelected: false)
                 }) {
                     Text("No - Not Prime")
+                        .font(.title)
+                        .padding()
+                        .frame(width: 340.0, height: 50)
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(15)
                 }
             }
             
