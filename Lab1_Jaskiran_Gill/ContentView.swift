@@ -84,11 +84,13 @@ struct ContentView: View {
         numOfWrongAnswers = 0
         numOfAttempts = 0
         updateGame()
+        startTimer() // timer is restarted after alert dismissed
     }
 
     func startTimer() {
         timer?.invalidate() // invalidates the timer
         // starts timer - 5 seconds
+        if isResultDisplayed { return } // prevent timer continuation on alert
         timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
             numOfWrongAnswers += 1 // increases count for wrong answer if answer is wrong
             numOfAttempts += 1 // increases count for correct answer if answer is wrong
