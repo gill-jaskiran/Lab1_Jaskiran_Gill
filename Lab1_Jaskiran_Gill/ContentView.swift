@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var numOfCorrectAnswers = 0
     @State private var numOfWrongAnswers = 0
     @State private var numOfAttempts = 0
+    @State private var isResultDisplayed = false
     @State private var timer: Timer?
     
     var body: some View {
@@ -38,6 +39,32 @@ struct ContentView: View {
                 numOfAttempts += 1
             }
         }
+    
+    func checkAnswer(isPrimeSelected: Bool) {
+        timer?.invalidate()
+        
+        let isPrime = isPrimeNumber(currentNumber)
+        if isPrimeSelected == isPrime {
+            numOfCorrectAnswers += 1
+        } else {
+            numOfWrongAnswers += 1
+        }
+        
+        numOfAttempts += 1
+        
+        if numOfAttempts % 10 == 0 {
+            isResultDisplayed = true
+        }
+        
+    }
+    
+    func isPrimeNumber(_ num: Int) -> Bool {
+        if num < 2 { return false }
+        for i in 2..<num {
+            if num % i == 0 { return false }
+        }
+        return true
+    }
     }
 #Preview {
     ContentView()
