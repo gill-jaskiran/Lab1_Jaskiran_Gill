@@ -20,19 +20,19 @@ struct ContentView: View {
                 .font(.largeTitle) // Added UI
                 .foregroundColor(.pink)
                 .padding(.top, 40)
-                .frame(maxWidth: .infinity, alignment: .top)
-            Text("Is this a Prime Number?")
+                .frame(maxWidth: .infinity, alignment: .top) // centering to the top
+            Text("Is this a Prime Number?") // adding subheading - the question
                 .font(.title)
                 .padding(.top, 10)
-            Spacer()
+            Spacer() // adding spacer so it looks more organied
             Text("\(currentNumber)") //adding the heading and UI
                 .font(.system(size: 90, weight: .bold))
                 .padding(.bottom, 0)
             VStack {
-                Button(action: {
-                    checkAnswer(isPrimeSelected: true)
+                Button(action: { // creating the buttons
+                    checkAnswer(isPrimeSelected: true) // calls the function when yes button is clicked
                 }) {
-                    Text("Yes - Prime")
+                    Text("Yes - Prime") // adding text and UI for yes button
                         .font(.title)
                         .padding()
                         .frame(width: 340, height: 50)
@@ -42,9 +42,9 @@ struct ContentView: View {
                 }
                 
                 Button(action: {
-                    checkAnswer(isPrimeSelected: false)
+                    checkAnswer(isPrimeSelected: false) // Calling the function if the no button is clicked
                 }) {
-                    Text("No - Not Prime")
+                    Text("No - Not Prime") // adding text and UI for No button
                         .font(.title)
                         .padding()
                         .frame(width: 340.0, height: 50)
@@ -54,22 +54,23 @@ struct ContentView: View {
                 }
             }
             
-            if let imageName = statusIcon {
+            if let imageName = statusIcon { // This will display the status icon
                 Image(systemName: imageName)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 80, height: 80)
+                // if correct the icon is green, if incorrect icon displayed in red
                     .foregroundColor(imageName == "checkmark" ? .green : .red)
                     .padding(.top, 10)
             }
             Spacer()
         }
         .onAppear {
-            startTimer()
+            startTimer() // timer activated on appear
         }
-        .alert(isPresented: $isResultDisplayed) {
+        .alert(isPresented: $isResultDisplayed) { // results are shown as a alert
             Alert(
-                title: Text("Results"),
+                title: Text("Results"), // adding UI for the alert
                 message: Text("Total Correct: \(numOfCorrectAnswers)\nTotal Wrong: \(numOfWrongAnswers)"),
                 dismissButton: .default(Text("OK"))
             )
